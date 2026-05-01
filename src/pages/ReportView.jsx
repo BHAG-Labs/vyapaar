@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router';
+import { useParams, useNavigate, Link } from 'react-router';
 import { supabase } from '../lib/supabase';
 
 function ScoreBadge({ score }) {
@@ -58,6 +58,7 @@ export default function ReportView() {
   const [reportData, setReportData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [toast, setToast] = useState('');
+  const [recommendedAgents, setRecommendedAgents] = useState([]);
 
   useEffect(() => {
     supabase
@@ -68,6 +69,16 @@ export default function ReportView() {
       .then(({ data }) => {
         setReportData(data);
         setLoading(false);
+        const bm = data?.data?.businessModel;
+        if (bm) {
+          supabase
+            .from('ai_agent_recommendations')
+            .select('weight, reason, agent:ai_agents(*)')
+            .eq('business_model', bm)
+            .order('weight', { ascending: false })
+            .limit(3)
+            .then(({ data: recs }) => setRecommendedAgents(recs || []));
+        }
       });
   }, [id]);
 
@@ -282,6 +293,41 @@ export default function ReportView() {
             })}
           </div>
         </Section>
+
+        {recommendedAgents.length > 0 && (
+          <Section title="Recommended BHAG Labs Agents">
+            <p className="text-sm text-slate-400 mb-4">
+              Based on your <span className="font-medium text-slate-300">{intake.businessModel}</span> business model,
+              these proprietary AI agents (hosted on our GCP infra) plug straight into your action plan.
+            </p>
+            <div className="grid gap-4 sm:grid-cols-3">
+              {recommendedAgents.map(({ agent, reason }) => agent && (
+                <div key={agent.id} className="rounded-lg border border-surface-border bg-surface-light p-4 flex flex-col">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="text-2xl">{agent.icon}</span>
+                    <div>
+                      <h4 className="font-semibold text-slate-200 leading-tight">{agent.name}</h4>
+                      <p className="text-[11px] uppercase tracking-wider text-slate-500">{agent.category}</p>
+                    </div>
+                  </div>
+                  <p className="text-sm text-slate-400 italic mb-2">{agent.tagline}</p>
+                  <p className="text-xs text-slate-500 mb-3">{reason}</p>
+                  <Link
+                    to="/marketplace"
+                    className="mt-auto text-xs font-semibold uppercase tracking-wider text-brand-light hover:underline"
+                  >
+                    See agent →
+                  </Link>
+                </div>
+              ))}
+            </div>
+            <div className="mt-4 text-right">
+              <Link to="/marketplace" className="text-sm font-medium text-brand-light hover:underline">
+                Browse all agents in the marketplace →
+              </Link>
+            </div>
+          </Section>
+        )}
 
         <Section title="Recommendation">
           <div className="rounded-xl border border-brand/30 bg-brand/5 p-6">

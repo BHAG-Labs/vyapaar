@@ -4,7 +4,7 @@ import Footer from './Footer';
 
 const navLinks = [
   { to: '/dashboard', label: 'Dashboard' },
-  { to: '/marketplace', label: 'Marketplace' },
+  { to: '/marketplace', label: 'AI Agents' },
   { to: '/profile', label: 'Profile' },
 ];
 
@@ -20,9 +20,12 @@ export default function Layout() {
     <div className="min-h-screen flex flex-col bg-cream">
       <nav className="sticky top-0 z-40 glass-nav">
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-          <Link to="/dashboard" className="flex flex-col leading-none">
-            <span className="font-heading font-bold text-xl text-charcoal tracking-tight">Vyapaar</span>
-            <span className="text-[10px] text-charcoal/50 font-subheading">by BHAG Labs</span>
+          <Link to="/dashboard" className="flex items-center gap-2.5 leading-none">
+            <img src="/logo-mark.svg" alt="" className="h-8 w-8" aria-hidden="true" />
+            <span className="flex flex-col">
+              <span className="font-heading font-bold text-xl text-charcoal tracking-tight">Yantra</span>
+              <span className="text-[10px] text-charcoal/50 font-subheading">by BHAG Labs</span>
+            </span>
           </Link>
 
           <div className="flex items-center gap-6">
