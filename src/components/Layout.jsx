@@ -1,5 +1,6 @@
 import { Link, NavLink, Outlet } from 'react-router';
 import { useAuth } from '../context/AuthContext';
+import Footer from './Footer';
 
 const navLinks = [
   { to: '/dashboard', label: 'Dashboard' },
@@ -7,36 +8,33 @@ const navLinks = [
   { to: '/profile', label: 'Profile' },
 ];
 
+const linkCls = ({ isActive }) =>
+  `text-xs uppercase tracking-[0.15em] transition-colors ${
+    isActive ? 'text-terracotta border-b-2 border-terracotta pb-1' : 'text-charcoal/70 hover:text-charcoal'
+  }`;
+
 export default function Layout() {
   const { profile, signOut } = useAuth();
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <nav className="border-b border-surface-border bg-surface">
+    <div className="min-h-screen flex flex-col bg-cream">
+      <nav className="sticky top-0 z-40 glass-nav">
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-          <Link to="/dashboard" className="flex items-center gap-2">
-            <span className="text-2xl font-bold text-brand">V</span>
-            <span className="text-xl font-semibold text-slate-100">Vyapaar</span>
+          <Link to="/dashboard" className="flex flex-col leading-none">
+            <span className="font-heading font-bold text-xl text-charcoal tracking-tight">Vyapaar</span>
+            <span className="text-[10px] text-charcoal/50 font-subheading">by BHAG Labs</span>
           </Link>
 
           <div className="flex items-center gap-6">
             {navLinks.map(({ to, label }) => (
-              <NavLink
-                key={to}
-                to={to}
-                className={({ isActive }) =>
-                  `text-sm font-medium transition-colors ${isActive ? 'text-brand-light' : 'text-slate-400 hover:text-slate-200'}`
-                }
-              >
-                {label}
-              </NavLink>
+              <NavLink key={to} to={to} className={linkCls}>{label}</NavLink>
             ))}
 
-            <div className="flex items-center gap-3 border-l border-surface-border pl-6">
-              <span className="text-sm text-slate-400">{profile?.full_name || 'User'}</span>
+            <div className="flex items-center gap-4 border-l border-charcoal/20 pl-6">
+              <span className="hidden sm:inline text-xs text-charcoal/50">{profile?.full_name || 'User'}</span>
               <button
                 onClick={signOut}
-                className="text-sm font-medium text-slate-400 hover:text-red-400 transition-colors cursor-pointer"
+                className="text-xs uppercase tracking-[0.15em] text-charcoal/70 hover:text-terracotta transition-colors cursor-pointer"
               >
                 Sign out
               </button>
@@ -46,10 +44,12 @@ export default function Layout() {
       </nav>
 
       <main className="flex-1">
-        <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
           <Outlet />
         </div>
       </main>
+
+      <Footer />
     </div>
   );
 }
