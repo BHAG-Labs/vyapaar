@@ -8,12 +8,16 @@ import Profile from './pages/Profile';
 import ReportIntake from './pages/ReportIntake';
 import ReportView from './pages/ReportView';
 import Marketplace from './pages/Marketplace';
+import LegalPage from './pages/LegalPage';
 
 export default function App() {
   return (
     <Routes>
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
+      <Route path="/privacy" element={<LegalPage kind="privacy" />} />
+      <Route path="/terms" element={<LegalPage kind="terms" />} />
+      <Route path="/grievance" element={<LegalPage kind="grievance" />} />
       <Route element={<ProtectedRoute />}>
         <Route element={<Layout />}>
           <Route path="/" element={<Dashboard />} />

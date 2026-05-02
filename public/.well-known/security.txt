@@ -1,0 +1,15 @@
+# Security disclosure policy for Yantra (yantra.bhaglabs.com)
+# Following RFC 9116. https://securitytxt.org
+
+Contact: mailto:security@bhaglabs.com
+Expires: 2027-05-01T00:00:00.000Z
+Preferred-Languages: en, hi
+Canonical: https://yantra.bhaglabs.com/.well-known/security.txt
+Policy: https://yantra.bhaglabs.com/privacy
+
+# We welcome reports from security researchers. Please:
+#   - Give us at least 90 days to respond before any public disclosure.
+#   - Do not access or alter data you do not own.
+#   - Do not run automated scanning that creates load on production systems.
+# We acknowledge meaningful reports in our security hall of fame
+# (link to be published when the program is formalised).
