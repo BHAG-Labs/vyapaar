@@ -1,12 +1,39 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="Yantra">
-  <title>Yantra — Instrument, Machine</title>
+  <title>Yantra — instrument dial</title>
   <rect width="256" height="256" fill="#f1ebe1"/>
-  <!-- Outer ring (the marketplace boundary) -->
-  <circle cx="128" cy="128" r="100" fill="none" stroke="#1a1a1a" stroke-width="5"/>
-  <!-- Sri-Yantra-inspired interlocking triangles: agents (down) + founders (up) meet in the middle -->
-  <path d="M128 44  L218 196 L38 196 Z" fill="none" stroke="#c1502e" stroke-width="5" stroke-linejoin="miter"/>
-  <path d="M128 212 L38 60   L218 60  Z" fill="none" stroke="#2a4942" stroke-width="5" stroke-linejoin="miter"/>
-  <!-- Bindu (the deal point) -->
-  <circle cx="128" cy="128" r="12" fill="#c89b27"/>
-  <circle cx="128" cy="128" r="4"  fill="#1a1a1a"/>
+
+  <!-- Instrument bezel -->
+  <circle cx="128" cy="128" r="100" fill="none" stroke="#1a1a1a" stroke-width="3"/>
+  <circle cx="128" cy="128" r="88"  fill="none" stroke="#1a1a1a" stroke-width="0.8"/>
+
+  <!-- Cardinal ticks (N/E/S/W) -->
+  <g stroke="#1a1a1a" stroke-width="3" stroke-linecap="butt">
+    <line x1="128" y1="32"  x2="128" y2="52"/>
+    <line x1="128" y1="204" x2="128" y2="224"/>
+    <line x1="32"  y1="128" x2="52"  y2="128"/>
+    <line x1="204" y1="128" x2="224" y2="128"/>
+  </g>
+
+  <!-- Cardinal labels -->
+  <text x="128" y="74"  text-anchor="middle" font-family="Inter, sans-serif" font-weight="700" font-size="9" letter-spacing="2" fill="#1a1a1a">N</text>
+  <text x="128" y="194" text-anchor="middle" font-family="Inter, sans-serif" font-weight="700" font-size="9" letter-spacing="2" fill="#1a1a1a">S</text>
+  <text x="74"  y="132" text-anchor="middle" font-family="Inter, sans-serif" font-weight="700" font-size="9" letter-spacing="2" fill="#1a1a1a">W</text>
+  <text x="182" y="132" text-anchor="middle" font-family="Inter, sans-serif" font-weight="700" font-size="9" letter-spacing="2" fill="#1a1a1a">E</text>
+
+  <!-- Inter-cardinal minor ticks -->
+  <g stroke="#1a1a1a" stroke-width="1.4" opacity="0.55">
+    <line x1="60"  y1="60"  x2="72"  y2="72"/>
+    <line x1="196" y1="60"  x2="184" y2="72"/>
+    <line x1="60"  y1="196" x2="72"  y2="184"/>
+    <line x1="196" y1="196" x2="184" y2="184"/>
+  </g>
+
+  <!-- Needle: terracotta pointing NE (the deal direction), forest tail pointing SW -->
+  <path d="M128 128 L194 62" stroke="#c1502e" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="194" cy="62" r="5" fill="#c1502e"/>
+  <path d="M128 128 L96 160" stroke="#2a4942" stroke-width="3.5" stroke-linecap="round" opacity="0.9"/>
+
+  <!-- Hub -->
+  <circle cx="128" cy="128" r="11" fill="#c89b27" stroke="#1a1a1a" stroke-width="2"/>
+  <circle cx="128" cy="128" r="3"  fill="#1a1a1a"/>
 </svg>
